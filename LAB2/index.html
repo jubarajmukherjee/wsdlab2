@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>LAB2</title>
+
+   <script>
+                        function getLocation() {
+                                if (navigator.geolocation) {
+                                        navigator.geolocation.getCurrentPosition(setVars, printError);
+                                }
+                                else {
+                                        console.log('Geolocation is not supported by this browser.');
+                                }
+                        }
+                        function setVars(position) {
+                                latt = position.coords.latitude;
+                                long = position.coords.longitude;
+                                document.getElementById('latitude').innerText += latt;
+                                document.getElementById('longitude').innerText += long;
+                        }
+                        function printError(error) {
+                                switch (error.code) {
+                                        case error.PERMISSION_DENIED:
+                                                console.log('User denied the request for Geolocation.');
+                                                break;
+                                        case error.POSITION_UNAVAILABLE:
+                                                console.log('Location information is unavailable.');
+                                                break;
+                                        case error.TIMEOUT:
+                                                console.log('The request to get user location timed out.');
+                                                break;
+                                        case error.UNKNOWN_ERROR:
+                                                console.log('An unknown error occurred.');
+                                                break;
+                                }
+                        }
+                        window.onload = function () {
+                                var ctx = document.getElementById('map').getContext('2d');
+                                var img = new Image();
+                                img.onload = function () {
+                                        ctx.drawImage(img, 0, 0);
+                                };
+                                img.src = '/location-icon.svg';
+                        }
+
+                        
+                        var c = document.getElementById("myCanvas");
+                        var ctx = c.getContext("2d");
+                        ctx.font = "30px Arial";
+                        ctx.fillText("Hello World", 10, 50);
+
+
+                </script>
+
+</head>
+
+<body>
+
+<div class="location">
+        <h2>Location</h2>
+        <canvas id="map" width="100" height="100"></canvas>
+        <p id="latitude">Latitude:</p>
+        <p id="longitude">Longitude:</p>
+
+        <button onclick="getLocation()">get location</button>
+</div> 
+
+<form>
+  <h2>Form</h2>
+  <input type="text" placeholder="Name" required><br>
+  <input type="email" placeholder="Email" required><br>
+  <input type="tel" placeholder="Mobile no" required><br>
+  <label>Select date and time for appointment:</label>
+  <input type="datetime-local" required><br>
+  <button type="submit">Submit</button><br>
+
+</form>
+
+<br><br>
+
+
+<h2>Video</h2>
+<video src = "vid.mp4"  width = "300" height = "200" controls>
+   Your browser does not support the <video> element.   
+</video>
+ <audio controls autoplay muted>
+  <source src="music.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio> 
+
+<h2>Canvas</h2>
+ <canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;">
+</canvas> 
+
+
+
+</body> 
+</html>
